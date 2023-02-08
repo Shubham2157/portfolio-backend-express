@@ -26,6 +26,29 @@ app.get('/', (req,res)=>{
     )
 })
 
+// ===================================================================
+
+
+//                 LOGS
+
+app.get("/download/logs/application.log", (req,res) => {
+  var fs = require("fs");
+  fs.readFile('./prodlogs/app.log', function (err, data) {
+    res.send(data)
+ });
+})
+
+
+
+app.get("/download/logs/error.log", (req,res) => {
+  var fs = require("fs");
+  fs.readFile('./prodlogs/error.log', function (err, data) {
+    res.send(data)
+ });
+})
+
+// ===================================================================
+
 
   app.get("/projects", async (req, res) => {
     logger.info(`Requested ${req.method} method at ${req.url}`)
