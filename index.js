@@ -38,7 +38,6 @@ app.get("/download/logs/application.log", (req,res) => {
     d.getFullYear() + "_" + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2)+ ":" + ("0" + d.getSeconds()).slice(-2);
   const filename = `application-${datestring}.log`
   var mimetype = mime.lookup(file);
-  res.setHeader(`Content-disposition', 'attachment; filename=${filename}`)
   res.setHeader('Content-type', mimetype)
   res.setHeader('Content-Length', file.length)
   res.download(file, filename)
