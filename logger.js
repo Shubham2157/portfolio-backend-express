@@ -8,7 +8,7 @@ var options = {
     file: {
       level: 'info',
       name: 'file.info',
-      filename: `./logs/app.log`,
+      filename: `./prodlogs/app.log`,
       handleExceptions: true,
       json: true,
       maxsize: 5242880, // 5MB
@@ -18,7 +18,7 @@ var options = {
     errorFile: {
       level: 'error',
       name: 'file.error',
-      filename: `./logs/error.log`,
+      filename: `./prodlogs/error.log`,
       handleExceptions: true,
       json: true,
       maxsize: 5242880, // 5MB
