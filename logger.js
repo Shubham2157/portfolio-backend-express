@@ -1,5 +1,6 @@
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, label, printf } = format;
+const path = require('path');
 
 const PORT = process.env.PORT || 3001
 const IP = process.env.IP || "127.0.0.1"
@@ -8,7 +9,7 @@ var options = {
     file: {
       level: 'info',
       name: 'file.info',
-      filename: `./prodlogs/app.log`,
+      filename: path.join(__dirname, 'prodlogs', 'app.log'),
       handleExceptions: true,
       json: true,
       maxsize: 5242880, // 5MB
