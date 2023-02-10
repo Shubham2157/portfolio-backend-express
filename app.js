@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
     res.send("WELCOME TO MY BLOG/PORTFOLIO")
 })
 
-app.use("/logs", require("./routes/logs"));
+app.use("/logs/downloads", require("./routes/logs"));
 app.use("/api/project", require("./routes/projects"));
 
 

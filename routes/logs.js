@@ -1,19 +1,28 @@
 const express = require('express')
 const router = express.Router();
+const path = require('path');
 
 //                 LOGS
 
 router.get("/application.log", (req, res) => {
-  const file = `${__dirname}/prodlogs/app.log`
-  res.sendFile(file)
+  const file = path.join(__dirname, '..','prodlogs', 'app.log')
+  var d = new Date().toLocaleString('en-US', {timeZone: 'Asia/Kolkata'})
+  var filename = `application_logs-${d}.log`
+  console.log(d);
+  filename = filename.replaceAll('/','_')
+  filename = filename.replaceAll(':','_')
+  filename = filename.replaceAll(',','')
+  console.log(filename);
+  res.download(file, filename)
 })
 
 router.get("/error.log", (req, res) => {
-  const file = `${__dirname}/prodlogs/error.log`
-  var d = new Date()
-  var datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" +
-    d.getFullYear() + "_" + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2) + ":" + ("0" + d.getSeconds()).slice(-2);
-  const filename = `error-logs-${datestring}.log`
+  const file = path.join(__dirname, '..','prodlogs', 'error.log')
+  var d = new Date().toLocaleString('en-US', {timeZone: 'Asia/Kolkata'})
+  const filename = `error_logs-${d}.log`
+  filename = filename.replaceAll('/','_')
+  filename = filename.replaceAll(':','_')
+  filename = filename.replaceAll(',','')
   res.download(file, filename)
 })
 
