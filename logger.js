@@ -45,7 +45,7 @@ var logger = createLogger({
       ),
     transports: [
         new (transports.Console)(options.console),
-        new transports.File(options.file),
+        new (transports.File)(options.file),
         new transports.File(options.errorFile)
     ],
     exitOnError: false
