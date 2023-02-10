@@ -8,11 +8,9 @@ router.get("/application.log", (req, res) => {
   const file = path.join(__dirname, '..','prodlogs', 'app.log')
   var d = new Date().toLocaleString('en-US', {timeZone: 'Asia/Kolkata'})
   var filename = `application_logs-${d}.log`
-  console.log(d);
   filename = filename.replaceAll('/','_')
   filename = filename.replaceAll(':','_')
   filename = filename.replaceAll(',','')
-  console.log(filename);
   res.download(file, filename)
 })
 
