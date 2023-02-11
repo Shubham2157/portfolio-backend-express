@@ -3,6 +3,7 @@ const router = express.Router();
 const { Project } = require("../model/project");
 var logger = require('../config/logger')
 const baseURL = '/api/project';
+const auth = require('../middleware/auth')
 
 router.get("/all", async (req, res) => {
     logger.info(`Requested ${req.method} method at ${baseURL + req.url}`)
@@ -19,7 +20,7 @@ router.get("/:id", async (req, res) => {
 });
 
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
     logger.info(`Requested ${req.method} method at ${baseURL + req.url}`)
     const newProject = new Project({ ...req.body });
     newProject.createdAt = Date.now();
@@ -29,7 +30,7 @@ router.post("/", async (req, res) => {
 });
 
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
     logger.info(`Requested ${req.method} method at ${baseURL + req.url}`)
     const { id } = req.params;
     req.body.updatedAt = Date.now();
@@ -38,7 +39,7 @@ router.put("/:id", async (req, res) => {
     return res.status(200).json(updatedProject);
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
     logger.info(`Requested ${req.method} method at ${baseURL + req.url}`)
     const { id } = req.params;
     const deletedProject = await Project.findByIdAndDelete(id);
