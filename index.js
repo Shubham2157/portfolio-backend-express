@@ -1,6 +1,6 @@
 require('dotenv').config()
 const app = require("./app")
-var logger = require('./logger')
+var logger = require('./config/logger')
 
 const PORT = process.env.PORT || 3001
 

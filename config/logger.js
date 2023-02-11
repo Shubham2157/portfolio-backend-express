@@ -5,11 +5,13 @@ const path = require('path');
 const PORT = process.env.PORT || 3001
 const IP = process.env.IP || "127.0.0.1"
 
+const LOG_PATH = process.env.LOG_PATH;
+
 var options = {
     file: {
       level: 'info',
       name: 'file.info',
-      filename: path.join(__dirname, 'prodlogs', 'app.log'),
+      filename: path.join(__dirname, '..' ,LOG_PATH, 'app.log'),
       handleExceptions: true,
       json: true,
       maxsize: 5242880, // 5MB
@@ -19,7 +21,7 @@ var options = {
     errorFile: {
       level: 'error',
       name: 'file.error',
-      filename: `./prodlogs/error.log`,
+      filename: path.join(__dirname, '..' ,LOG_PATH, 'error.log'),
       handleExceptions: true,
       json: true,
       maxsize: 5242880, // 5MB

@@ -2,10 +2,10 @@ const express = require('express')
 const app = express()
 app.use(express.json());
 
-var logger = require('./logger')
+var logger = require('./config/logger')
 
 // database connection
-var database = require('./database')
+var database = require('./config/database')
 
 app.get('/', (req, res) => {
     logger.info(`Requested ${req.method} method at ${req.url}`)

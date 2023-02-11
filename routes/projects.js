@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const { Project } = require("../model/project");
-var logger = require('../logger')
+var logger = require('../config/logger')
 const baseURL = '/api/project';
 
 router.get("/all", async (req, res) => {
