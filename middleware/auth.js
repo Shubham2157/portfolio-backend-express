@@ -1,6 +1,9 @@
-const auth = (req, res, next) =>{
+const { User } = require("../model/user");
+
+const auth = async (req, res, next) =>{
+    const user = await User.find();
     try {
-        if (req.headers.apikey === process.env.API_KEY) {
+        if (req.headers.authorization.split(" ")[1] === user[0].token) {
             next()
         } else {
             res.status(401).json({"errors":[{"title":"Not authorized","detail":"Not authorized","code":"401","status":"401"}]})
