@@ -35,7 +35,7 @@ router.post("/login", async (req, res) => {
             else{
                 bcrypt.compare(password, user.password, async (err, result) => {
                     if (result == true) {
-                        var token = jwt.sign({ user }, 'jwttoken');
+                        var token = jwt.sign( { 'email': user.email }, process.env.JWT_SECRET, { expiresIn: '5h' });
                         await User.updateOne({ "_id": user.id }, { token });
                         res.json({token})
                     }

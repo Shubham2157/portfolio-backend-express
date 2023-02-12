@@ -1,16 +1,21 @@
 const { User } = require("../model/user");
+var jwt = require('jsonwebtoken');
 
-const auth = async (req, res, next) =>{
-    const user = await User.find();
-    try {
-        if (req.headers.authorization.split(" ")[1] === user[0].token) {
-            next()
-        } else {
-            res.status(401).json({"errors":[{"title":"Not authorized","detail":"Not authorized","code":"401","status":"401"}]})
+const auth = async (req, res, next) => {
+    // console.log(process.env.JWT_SECRET);
+   
+    //console.log(user);
+        try {
+            var decoded = jwt.verify(req.headers.authorization.split(" ")[1], process.env.JWT_SECRET);
+            const user = await User.findOne({ 'email': decoded.email });
+            if (user !== null) {
+                next()
+            } else {
+                res.status(401).json({ "errors": [{ "title": "Not authorized", "detail": "Not authorized", "code": "401", "status": "401" }] })
+            }
+        } catch (error) {
+            res.status(401).json({ "errors": [{ "code": "401", "status": error }] })
         }
-    } catch (error) {
-        res.status(401).json({"errors":[{"title":"Not authorized","detail":"Not authorized","code":"401","status":"401"}]})
-    }
 }
 
 module.exports = auth;
