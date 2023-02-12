@@ -12,14 +12,14 @@ router.get("/all", async (req, res) => {
 });
 
 
-// router.get("/:id", async (req, res) => {
-//     logger.info(`ID Requested ${req.method} method at ${baseURL + req.url}`)
-//     const { id } = req.params;
-//     const newProject = await Project.findById(id);
-//     return res.status(200).json(newProject);
-// });
+router.get("/:id", async (req, res) => {
+    logger.info(`ID Requested ${req.method} method at ${baseURL + req.url}`)
+    const { id } = req.params;
+    const newProject = await Project.findById(id);
+    return res.status(200).json(newProject);
+});
 
-router.get("/:slug", async (req, res) => {
+router.get("/slug/:slug", async (req, res) => {
     logger.info(`Slug Requested ${req.method} method at ${baseURL + req.url}`)
     const { slug } = req.params;
     try {
