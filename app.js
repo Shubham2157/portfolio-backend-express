@@ -4,9 +4,6 @@ app.use(express.json());
 
 var logger = require('./config/logger')
 
-// database connection
-var database = require('./config/database')
-
 app.get('/', (req, res) => {
     logger.info(`Requested ${req.method} method at ${req.url}`)
     res.send("WELCOME TO MY BLOG/PORTFOLIO")

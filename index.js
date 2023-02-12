@@ -1,4 +1,7 @@
 require('dotenv').config()
+// database connection
+require('./config/database')
+
 const app = require("./app")
 var logger = require('./config/logger')
 
