@@ -63,6 +63,7 @@ router.post("/login", async (req, res) => {
                     if (result == true) {
                         var token = jwt.sign( { 'email': user.email }, process.env.JWT_SECRET, { expiresIn: '5h' });
                         await User.updateOne({ "_id": user.id }, { token });
+                        logger.info("Token Generated")
                         res.json({token})
                     }
                     else{
