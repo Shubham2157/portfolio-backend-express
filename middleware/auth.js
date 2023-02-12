@@ -11,7 +11,7 @@ const auth = async (req, res, next) => {
                 res.status(401).json({ "errors": [{ "title": "Not authorized", "detail": "Not authorized", "code": "401", "status": "401" }] })
             }
         } catch (error) {
-            res.status(401).json({ "errors": [{ "code": "401", "status": error }] })
+            res.status(401).json({ "errors": [{ "title": "Not authorized", "code": "401", "status": error }] })
         }
 }
 
