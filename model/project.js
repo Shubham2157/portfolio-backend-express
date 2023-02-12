@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const slug = require('mongoose-slug-updater')
+mongoose.plugin(slug)
 
 const ProjectSchema = new mongoose.Schema({
   name: {
@@ -13,6 +15,7 @@ const ProjectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  slug: { type: String, slug: "name", unique: true , lowercase: true },
   isActive: {
     type: Boolean,
     required: false,

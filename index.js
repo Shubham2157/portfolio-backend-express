@@ -8,5 +8,5 @@ var logger = require('./config/logger')
 const PORT = process.env.PORT || 3001
 
 app.listen(PORT, () => {
-  logger.info(`Express server is running on port ${PORT}`)
+  logger.info(`Portfolio/Blog server is running on port ${PORT}`)
 })
