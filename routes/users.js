@@ -12,7 +12,7 @@ router.post("/signup", async (req, res) => {
             logger.info(`Email ID is not approved ${email}`)
             res.send({'message': 'Your Email ID is not approved'})
         } else{
-            User.findOne({ email }, (err,user) => { 
+            User.findOne({ email }, async(err,user) => { 
                 if (err) {
                     logger.error(`${email} - ${err}`)
                     res.send(err)
@@ -22,7 +22,7 @@ router.post("/signup", async (req, res) => {
                         res.send({'message': 'User Already Present'})
                     }
                     else{
-                        bcrypt.hash(password, 10, async (err, hash) => {
+                        bcrypt.hash(password, parseInt(process.env.SALT), async (err, hash) => {
                             if (err) {
                                 logger.error(`${email} - ${err}`)
                                 res.send({'error': `${err}`})
@@ -30,6 +30,7 @@ router.post("/signup", async (req, res) => {
                             password = hash
                             const newUser = new User({ email, password });
                             await newUser.save();
+                            logger.info(`User Created ${email}`)
                             return res.status(201).json({
                                 message : 'User Created',
                                 email: email
@@ -61,7 +62,7 @@ router.post("/login", async (req, res) => {
             else{
                 bcrypt.compare(password, user.password, async (err, result) => {
                     if (result == true) {
-                        var token = jwt.sign( { 'email': user.email }, process.env.JWT_SECRET, { expiresIn: '5h' });
+                        var token = jwt.sign( { 'email': user.email }, process.env.JWT_SECRET, { expiresIn: process.env.EXPIRES_IN });
                         await User.updateOne({ "_id": user.id }, { token });
                         logger.info("Token Generated")
                         res.json({token})
