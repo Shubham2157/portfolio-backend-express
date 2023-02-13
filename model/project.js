@@ -15,6 +15,13 @@ const ProjectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  link: {
+    type: String,
+    required: true,
+  },
+  tech_stack: {
+    data: [{type: String}]
+  },
   slug: { type: String, slug: "name", unique: true , lowercase: true },
   isActive: {
     type: Boolean,
